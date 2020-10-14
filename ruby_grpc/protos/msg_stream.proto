@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package msg;
+
+service Frame {
+
+  rpc RecvMsg (stream RecvData) returns (Response){}
+  rpc SendMsg (IdData) returns (stream SendData) {}
+
+  rpc TimeResult (IdData) returns (Response) {}
+}
+
+message IdData {
+  int32 length = 1;
+  int32 command = 2;
+  int32 dest = 3;
+  int32 msgid = 4;
+}
+
+message RecvData {
+  int32 length = 1;
+  int32 command = 2;
+  int32 dest = 3;
+  string message = 4;
+}
+
+message SendData {
+  int32 length = 1;
+  int32 command = 2;
+  int32 dest = 3;
+  int32 msgid = 4;
+  string message = 5;
+}
+
+message Response {
+  int32 length = 1;
+  int32 command = 2;
+  int32 dest = 3;
+  int32 msgid = 4;
+  int32 rescode = 5;
+}
+
